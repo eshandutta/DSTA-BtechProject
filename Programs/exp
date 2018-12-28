@@ -1,0 +1,39 @@
+import cv2 as cv
+import numpy as np
+from matplotlib import pyplot as plt
+
+font={'family':'serif',
+      'color':'darkred',
+      'weight':'normal',
+      'size':16,
+      }
+#img = cv.imread('LeafMold.jpg',0)
+
+#ret,thresh2 = cv.threshold(img,127,255,cv.THRESH_BINARY_INV)
+#---------------------------------------------------------------------------
+pic= cv.imread('Sample2.jpg',0)
+
+ret,thresh2 = cv.threshold(pic,127,255,cv.THRESH_BINARY_INV)
+
+circles = cv.HoughCircles(thresh2,cv.HOUGH_GRADIENT,1,20,param1=200,param2=10,minRadius=0,maxRadius=30)
+ 
+count = 0
+
+for i in circles[0,:]:
+    count = count + 1
+
+
+
+DiseaseName="Leaf Mold Disease."
+Solution="XYZ."
+
+
+plt.subplot(2,3,1),plt.imshow(thresh2,'gray')
+plt.xticks([]),plt.yticks([])
+plt.text(2,700,DiseaseName,fontdict=font)
+plt.text(2,800,Solution,fontdict=font)
+plt.show()
+
+cv2.waitKey(0) % 0xFF
+cv2.destroyAllWindows()
+
